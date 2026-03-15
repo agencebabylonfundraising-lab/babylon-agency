@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BABYLON — Collecte de Dons F2F | Performance Pure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg2: #f8f7f4;
+      --bg3: #f1f0ed;
+      --border: #e8e6e1;
+      --text: #1a1a1a;
+      --muted: #6b6860;
+      --accent: #1a1a2e;
+      --gold: #c9a84c;
+      --gold2: #e8c96e;
+      --gold-dim: rgba(201,168,76,0.12);
+      --green: #16a34a;
+      --blue: #2563eb;
+      --purple: #7c3aed;
+      --red: #dc2626;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* DRAFT BANNER */
+    .draft-banner {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s, transform 0.15s !important;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.88 !important;
+      transform: translateY(-1px);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      transition: 0.3s;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--accent) 0%, #2d2d5e 50%, #1a1a2e 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -150px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      padding-top: 40px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 36px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 7vw, 92px);
+      font-weight: 900;
+      line-height: 1.02;
+      color: #fff;
+      margin-bottom: 32px;
+      max-width: 780px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: rgba(255,255,255,0.75);
+      max-width: 500px;
+      margin-bottom: 52px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--accent);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 36px 5%;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-item:not(:last-child) {
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 100px 5%;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 64px;
+    }
+
+    /* NOS CLIENTS */
+    .clients {
+      background: var(--bg2);
+      padding: 64px 5%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .clients-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .clients-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .clients-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .client-logo {
+      flex: 1;
+      min-width: 160px;
+      max-width: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 32px;
+      border-right: 1px solid var(--border);
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+
+    .client-logo:last-child { border-right: none; }
+    .client-logo:hover { opacity: 1; }
+    .client-logo svg { height: 32px; width: auto; }
+
+    /* NOTRE MODELE */
+    .modele-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .modele-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 48px 36px;
+      border-radius: 16px;
+      transition: box-shadow 0.3s, transform 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .modele-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .modele-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 28px;
+    }
+
+    .modele-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .modele-card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .modele-card ul {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modele-card ul li {
+      font-size: 14px;
+      color: var(--muted);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .modele-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    /* COMMENT ÇA MARCHE */
+    .comment-ca-marche {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .steps-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .steps-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: calc(12.5% + 20px);
+      right: calc(12.5% + 20px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), rgba(201,168,76,0.2));
+      z-index: 0;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-number {
+      width: 80px;
+      height: 80px;
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 28px;
+      flex-shrink: 0;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step:hover .step-number {
+      background: var(--gold-dim);
+      transform: scale(1.05);
+    }
+
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 220px;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--bg); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .testimonial-metric {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #8a6a1a;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-quote {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .testimonial-quote::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      color: var(--gold);
+      line-height: 0;
+      vertical-align: -24px;
+      margin-right: 4px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .author-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2px;
+    }
+
+    .author-role {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* LA PROMESSE */
+    .promesse {
+      background: linear-gradient(135deg, var(--accent), #2d2d5e);
+      text-align: center;
+    }
+
+    .promesse-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 48px;
+    }
+
+    .promesse-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      max-width: 860px;
+      margin: 0 auto 40px;
+    }
+
+    .promesse-quote em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .promesse-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* FAQ */
+    .faq { background: var(--bg2); border-top: 1px solid var(--border); }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 800px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      background: var(--bg);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+
+    .faq-question:hover { background: var(--bg2); }
+
+    .faq-question-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1.4;
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: transform 0.3s, background 0.2s;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--gold-dim);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 28px 24px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.75;
+    }
+
+    /* CTA BANNER — gradient */
+    .cta-gradient-banner {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .cta-gradient-banner h2 {
+      color: #fff !important;
+      margin-bottom: 16px !important;
+    }
+
+    .cta-gradient-banner p {
+      color: rgba(255,255,255,0.8) !important;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--purple);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    /* CAREERS */
+    .careers { background: var(--bg2); border-top: 1px solid var(--border); }
+
+    .careers-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .careers-img {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .careers-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+
+    .careers-img:hover img { transform: scale(1.03); }
+    .careers-content .section-sub { margin-bottom: 40px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--accent);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 60px 5% 40px;
+    }
+
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand .nav-logo {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 16px;
+      color: var(--gold) !important;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      max-width: 280px;
+    }
+
+    .footer-brand .footer-email {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-brand .footer-email:hover { color: var(--gold2); }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 14px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col ul a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .nav-links li:not(:last-child):not(:nth-last-child(2)) a:not(.nav-cta) { display: none; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(255,255,255,0.98);
+        padding: 24px 5%;
+        border-bottom: 1px solid var(--border);
+        gap: 24px;
+        box-shadow: var(--shadow-md);
+      }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); }
+      .modele-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .careers-inner { grid-template-columns: 1fr; gap: 40px; }
+      .steps-wrapper { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .steps-wrapper::before { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 70px 5%; }
+      .stats-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .stat-item { border-right: none !important; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .steps-wrapper { grid-template-columns: 1fr; gap: 48px; }
+      .cta-gradient-banner { padding: 40px 24px; border-radius: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DRAFT BANNER -->
+  <div class="draft-banner">
+    🔐 BROUILLON — Validation requise avant publication
+  </div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a class="nav-logo" href="#">BABYLON</a>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#modele">Notre modèle</a></li>
+      <li><a href="#comment-ca-marche">Comment ça marche</a></li>
+      <li><a href="#clients">Nos clients</a></li>
+      <li><a href="#temoignages">Témoignages</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="mailto:contact@babylon-agency.fr" class="nav-cta">Parler à un expert →</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Collecte F2F Premium · France</div>
+      <h1>La collecte qui performe.<br><em>Sans compromis.</em></h1>
+      <p class="hero-sub">BABYLON acquiert vos donateurs mensuels. Vous payez uniquement les résultats. Nous absorbons tout le reste.</p>
+      <div class="hero-ctas">
+        <a href="mailto:contact@babylon-agency.fr" class="btn-primary">Demander une étude gratuite →</a>
+        <a href="#comment-ca-marche" class="btn-secondary">Découvrir notre méthode</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar" id="resultats">
+    <div class="stats-inner">
+      <div class="stat-item fade-in">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Modèle performance</div>
+      </div>
+      <div class="stat-item fade-in fade-in-delay-1">
+        <div class="stat-number">€0</div>
+        <div class="stat-label">Risque client</div>
+      </div>
+      <div class="stat-item fade-in fade-in-delay-2">
+        <div class="stat-number">85%+</div>
+        <div class="stat-label">Rétention à 12 mois</div>
+      </div>
+      <div class="stat-item fade-in fade-in-delay-3">
+        <div class="stat-number">48h</div>
+        <div class="stat-label">Pour démarrer</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOS CLIENTS -->
+  <div class="clients" id="clients">
+    <div class="clients-inner">
+      <div class="clients-label">Ils nous font confiance</div>
+      <div class="clients-logos">
+        <div class="client-logo">
+          <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="29" font-family="Arial Black, sans-serif" font-weight="900" font-size="26" fill="#1a1a2e" letter-spacing="2">WWF</text>
+          </svg>
+        </div>
+        <div class="client-logo">
+          <svg viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="28" font-family="Arial, sans-serif" font-weight="700" font-size="18" fill="#1a1a2e" letter-spacing="0.5">GREENPEACE</text>
+          </svg>
+        </div>
+        <div class="client-logo">
+          <svg viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="20" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#1a1a2e">MÉDECINS</text>
+            <text x="4" y="38" font-family="Arial, sans-serif" font-weight="400" font-size="13" fill="#1a1a2e">DU MONDE</text>
+          </svg>
+        </div>
+        <div class="client-logo">
+          <svg viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="20" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#1a1a2e">ACTION CONTRE</text>
+            <text x="4" y="38" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#1a1a2e">LA FAIM</text>
+          </svg>
+        </div>
+        <div class="client-logo">
+          <svg viewBox="0 0 190 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="20" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#1a1a2e">AMNESTY</text>
+            <text x="4" y="38" font-family="Arial, sans-serif" font-weight="400" font-size="13" fill="#1a1a2e">INTERNATIONAL</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTRE MODELE -->
+  <section id="modele">
+    <div class="section-inner">
+      <div class="section-eyebrow fade-in">Notre modèle</div>
+      <h2 class="section-title fade-in">L'excellence<br>à chaque étape.</h2>
+      <p class="section-sub fade-in">Trois piliers qui garantissent des résultats au-dessus du marché, campagne après campagne.</p>
+
+      <div class="modele-grid">
+        <div class="modele-card fade-in">
+          <div class="modele-icon">🏆</div>
+          <h3>Collecteurs d'élite</h3>
+          <p>Sélectionnés parmi les 5% les plus performants du secteur F2F en France. Formation intensive, coaching terrain continu.</p>
+          <ul>
+            <li>Processus de sélection en 4 étapes</li>
+            <li>Formation propriétaire BABYLON Academy</li>
+            <li>Suivi de performance en temps réel</li>
+            <li>Rémunération 100% à la performance</li>
+          </ul>
+        </div>
+        <div class="modele-card fade-in fade-in-delay-1">
+          <div class="modele-icon">✅</div>
+          <h3>Validation rigoureuse</h3>
+          <p>Chaque donateur est validé selon vos critères exacts avant facturation. Zéro compromis sur la qualité, conformité RGPD garantie.</p>
+          <ul>
+            <li>Double vérification téléphonique</li>
+            <li>Conformité RGPD garantie</li>
+            <li>Critères d'éligibilité sur mesure</li>
+            <li>Rapport de qualité mensuel</li>
+          </ul>
+        </div>
+        <div class="modele-card fade-in fade-in-delay-2">
+          <div class="modele-icon">📊</div>
+          <h3>Données & rétention</h3>
+          <p>Notre moteur analytique prédit les risques d'attrition et optimise les campagnes pour maximiser la valeur vie donateur.</p>
+          <ul>
+            <li>Tableau de bord client en temps réel</li>
+            <li>Prédiction de churn par IA</li>
+            <li>Rapports hebdomadaires automatisés</li>
+            <li>Insights marchés exclusifs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="comment-ca-marche" id="comment-ca-marche">
+    <div class="section-inner">
+      <div class="section-eyebrow fade-in" style="text-align:center;">Processus</div>
+      <h2 class="section-title fade-in" style="text-align:center; margin-bottom: 12px;">Comment ça marche ?</h2>
+      <p class="section-sub fade-in" style="text-align:center; margin: 0 auto 72px;">De votre premier contact à vos premiers donateurs validés — en moins de 3 semaines.</p>
+
+      <div class="steps-wrapper">
+        <div class="step fade-in">
+          <div class="step-number">1</div>
+          <h3>Contact</h3>
+          <p>Échangez avec un expert BABYLON. En 48h, nous analysons votre situation, vos objectifs et vos contraintes.</p>
+        </div>
+        <div class="step fade-in fade-in-delay-1">
+          <div class="step-number">2</div>
+          <h3>Analyse</h3>
+          <p>Notre équipe construit un plan de campagne sur mesure : zones géographiques, profil donateur cible, saisonnalité.</p>
+        </div>
+        <div class="step fade-in fade-in-delay-2">
+          <div class="step-number">3</div>
+          <h3>Déploiement</h3>
+          <p>Nos collecteurs d'élite partent sur le terrain. Formation, encadrement, outils de suivi en temps réel inclus.</p>
+        </div>
+        <div class="step fade-in fade-in-delay-3">
+          <div class="step-number">4</div>
+          <h3>Résultats</h3>
+          <p>Vous ne payez que les donateurs validés et actifs. Dashboard temps réel, rapports hebdomadaires, suivi rétention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="temoignages">
+    <div class="section-inner">
+      <div class="section-eyebrow fade-in">Ce que disent nos clients</div>
+      <h2 class="section-title fade-in">La confiance<br>se mérite.</h2>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-metric">📈 847 donateurs en 4 mois · 88% rétention</div>
+          <p class="testimonial-quote">En 4 mois, BABYLON nous a livré 847 nouveaux donateurs avec un taux de rétention à 12 mois de 88%. Notre meilleur résultat depuis 6 ans — et sans aucun risque financier de notre côté.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ML</div>
+            <div>
+              <div class="author-name">Marie-Laure Fontaine</div>
+              <div class="author-role">Directrice Collecte — Fondation Espoir Monde</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in fade-in-delay-1">
+          <div class="testimonial-metric">📉 Coût d'acquisition –40% vs agence précédente</div>
+          <p class="testimonial-quote">312 nouveaux donateurs mensuels en 8 semaines. Le coût d'acquisition était 40% inférieur à notre agence précédente — et la qualité, nettement supérieure. BABYLON comprend vraiment notre mission.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">TB</div>
+            <div>
+              <div class="author-name">Thomas Beaumont</div>
+              <div class="author-role">Directeur Général — Solidarité Enfants du Futur</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in fade-in-delay-2">
+          <div class="testimonial-metric">🏅 1 200 donateurs actifs · rétention 91%</div>
+          <p class="testimonial-quote">BABYLON a remplacé 2 agences qui ne tenaient pas leurs promesses. Depuis 18 mois : 1 200 donateurs actifs, rétention à 91%. Leur dashboard temps réel nous donne une visibilité totale. Confiance totale.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SL</div>
+            <div>
+              <div class="author-name">Sophie Laurent</div>
+              <div class="author-role">Responsable Fundraising — Alliance pour la Nature</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LA PROMESSE -->
+  <section class="promesse" id="promesse">
+    <div class="section-inner">
+      <div class="promesse-divider"></div>
+      <blockquote class="promesse-quote fade-in">
+        "Nous ne vous facturons qu'un seul succès — <em>le vôtre.</em>"
+      </blockquote>
+      <p class="promesse-sub fade-in">Notre modèle 100% performance signifie que nous portons le risque opérationnel, financier et humain. Vous ne payez que pour les donateurs validés et actifs.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow fade-in">Questions fréquentes</div>
+      <h2 class="section-title fade-in">Tout ce que vous<br>voulez savoir.</h2>
+      <p class="section-sub fade-in">Les vraies questions que posent les directeurs collecte avant de travailler avec nous.</p>
+
+      <div class="faq-list fade-in">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Combien coûte une campagne avec BABYLON ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Rien à l'avance. BABYLON fonctionne en 100% performance : vous payez uniquement par donateur validé et actif, selon un tarif convenu en amont. Pas de frais fixes, pas de retainer, pas de coût caché. Si nous ne livrons pas, vous ne payez pas.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Comment garantissez-vous la qualité des donateurs recrutés ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Chaque donateur passe par une double validation téléphonique dans les 72h suivant le recrutement. Nous vérifions l'intention, l'éligibilité selon vos critères, et la conformité RGPD. Un donateur non confirmé n'est pas facturé. Vous définissez les critères — nous nous y conformons strictement.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Quel est le taux de rétention moyen de vos donateurs ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Notre taux de rétention à 12 mois est supérieur à 85% sur l'ensemble de nos campagnes — contre une moyenne secteur de 68%. Cela s'explique par la qualité de la conversation initiale et par notre suivi post-recrutement.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Dans quelles villes et régions opérez-vous ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">BABYLON opère sur l'ensemble de la France métropolitaine, avec des équipes permanentes à Paris, Lyon, Marseille, Bordeaux et Toulouse. Nous pouvons déployer des équipes dans de nouvelles villes sous 2 à 3 semaines.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Combien de temps pour lancer une première campagne ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">De la signature du contrat au premier collecteur terrain : 2 à 3 semaines. Les premiers donateurs validés arrivent généralement dans les 30 jours suivant le lancement.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="section-inner">
+      <div class="cta-gradient-banner fade-in">
+        <div class="section-eyebrow" style="color: rgba(255,255,255,0.7); margin-bottom: 12px;">Prêts à avancer ?</div>
+        <h2>Lancez votre première<br>campagne en 3 semaines.</h2>
+        <p style="margin-bottom: 32px;">Obtenez une étude de faisabilité gratuite en 48h. Nos experts analysent votre situation et vous proposent un plan sur mesure.</p>
+        <a href="mailto:contact@babylon-agency.fr" class="btn-white">Demander mon étude gratuite →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREERS -->
+  <section class="careers" id="carrieres">
+    <div class="careers-inner">
+      <div class="careers-img fade-in">
+        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80" alt="Collecteur BABYLON sur le terrain" loading="lazy">
+      </div>
+      <div class="careers-content fade-in fade-in-delay-1">
+        <div class="section-eyebrow">Carrières</div>
+        <h2 class="section-title">Rejoignez<br>BABYLON.</h2>
+        <p class="section-sub">Vous avez le talent pour convaincre, l'énergie pour performer et l'ambition d'exceller ? Rejoignez les meilleurs collecteurs de France. CDI, primes, évolution rapide.</p>
+        <a href="https://causework.fr" target="_blank" class="btn-primary">Voir les offres sur CauseWork →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="nav-logo" href="#" style="color: var(--gold);">BABYLON</a>
+          <p>L'agence de collecte F2F premium. Performance pure, donateurs qualifiés, risque zéro pour les ONG partenaires.</p>
+          <a href="mailto:contact@babylon-agency.fr" class="footer-email">contact@babylon-agency.fr</a>
+          <div class="footer-socials">
+            <a class="social-link" href="#" title="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a class="social-link" href="#" title="X">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Collecte F2F</a></li>
+            <li><a href="#">Validation donateurs</a></li>
+            <li><a href="#">Analytics & data</a></li>
+            <li><a href="#">Conseil stratégique</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Agence</h4>
+          <ul>
+            <li><a href="#modele">Notre modèle</a></li>
+            <li><a href="#comment-ca-marche">Comment ça marche</a></li>
+            <li><a href="#carrieres">Carrières</a></li>
+            <li><a href="mailto:contact@babylon-agency.fr">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Légal</h4>
+          <ul>
+            <li><a href="#">Mentions légales</a></li>
+            <li><a href="#">RGPD</a></li>
+            <li><a href="#">Politique cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 BABYLON Agency. Tous droits réservés.</span>
+        <span style="color: var(--gold); font-size: 12px; letter-spacing: 0.1em;">PERFORMANCE · QUALITÉ · INTÉGRITÉ</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('mainNav');
+      nav.style.boxShadow = window.scrollY > 50 ? '0 4px 20px rgba(0,0,0,0.08)' : '';
+    });
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+</body>
+</html>
