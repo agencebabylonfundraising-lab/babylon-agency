@@ -137,7 +137,10 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      background-image: linear-gradient(rgba(10,10,15,0.85), rgba(10,10,15,0.85)),
+                        url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
     }
 
     /* CSS grid overlay */
@@ -371,8 +374,8 @@
       justify-content: center;
       padding: 20px 32px;
       border-right: 1px solid var(--border);
-      opacity: 0.5;
-      transition: opacity 0.3s var(--ease);
+      filter: grayscale(100%) opacity(0.5);
+      transition: filter 0.3s var(--ease);
       text-align: center;
       font-family: 'Inter', sans-serif;
       font-weight: 800;
@@ -383,7 +386,7 @@
     }
 
     .client-logo:last-child { border-right: none; }
-    .client-logo:hover { opacity: 1; }
+    .client-logo:hover { filter: grayscale(0%) opacity(1); }
 
     .client-logo span { color: var(--gold); font-size: 10px; vertical-align: super; }
     .client-logo small { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.02em; margin-top: 2px; }
@@ -917,7 +920,7 @@
     /* FOOTER */
     footer {
       background: var(--accent);
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(201,168,76,0.3);
       padding: 60px 5% 40px;
     }
 
@@ -1016,6 +1019,23 @@
       justify-content: space-between;
       font-size: 13px;
       color: rgba(255,255,255,0.35);
+    }
+
+    /* PARTICLES */
+    .particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.4);
+      animation: float linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
     }
 
     /* ANIMATIONS */
@@ -1251,7 +1271,7 @@
           <span class="testimonial-quote-mark">"</span>
           <p class="testimonial-quote">Avant BABYLON, notre taux de rétention à 12 mois était de 71%. Aujourd'hui il est à 89%. C'est 23 000€ de dons mensuels préservés chaque année.</p>
           <div class="testimonial-author">
-            <div class="author-avatar">SR</div>
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&q=80" alt="Sophie Renard" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border);">
             <div>
               <div class="author-name">Sophie Renard</div>
               <div class="author-role">Directrice Collecte</div>
@@ -1264,7 +1284,7 @@
           <span class="testimonial-quote-mark">"</span>
           <p class="testimonial-quote">Nous avons essayé 3 agences. BABYLON est la seule qui a refusé d'être payée pour des donateurs qui n'ont pas passé les 60 jours. Ça change tout.</p>
           <div class="testimonial-author">
-            <div class="author-avatar">MT</div>
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" alt="Marc Thiébaut" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border);">
             <div>
               <div class="author-name">Marc Thiébaut</div>
               <div class="author-role">Directeur Général</div>
@@ -1277,7 +1297,7 @@
           <span class="testimonial-quote-mark">"</span>
           <p class="testimonial-quote">En 6 mois, BABYLON nous a apporté 312 donateurs qualifiés. Notre équipe interne en apportait 80 sur la même période.</p>
           <div class="testimonial-author">
-            <div class="author-avatar">IM</div>
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" alt="Isabelle Morin" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--border);">
             <div>
               <div class="author-name">Isabelle Morin</div>
               <div class="author-role">Responsable Partenariats</div>
@@ -1443,6 +1463,84 @@
   </footer>
 
   <script>
+    // ── PARTICLES ──
+    (function() {
+      const hero = document.querySelector('.hero');
+      if (!hero) return;
+      for (let i = 0; i < 12; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 12) + 's';
+        p.style.animationDelay = (-Math.random() * 20) + 's';
+        p.style.width = p.style.height = (3 + Math.random() * 3) + 'px';
+        hero.appendChild(p);
+      }
+    })();
+
+    // ── STATS COUNTER ──
+    (function() {
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          statsObserver.unobserve(entry.target);
+          // Find the 85% stat
+          entry.target.querySelectorAll('.float-stat-num').forEach(el => {
+            const text = el.textContent.trim();
+            if (text === '85%+') {
+              const duration = 1200;
+              const startTime = performance.now();
+              function tick(now) {
+                const progress = Math.min((now - startTime) / duration, 1);
+                el.textContent = Math.round(85 * progress) + '%+';
+                if (progress < 1) requestAnimationFrame(tick);
+              }
+              requestAnimationFrame(tick);
+            }
+          });
+        });
+      }, { threshold: 0.3 });
+      const statsFloat = document.querySelector('.hero-stats-float');
+      if (statsFloat) statsObserver.observe(statsFloat);
+    })();
+
+    // ── STEP CASCADE ──
+    (function() {
+      const steps = document.querySelectorAll('.step');
+      if (!steps.length) return;
+      steps.forEach((step, i) => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateY(24px)';
+        step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        step.style.transitionDelay = (i * 0.2) + 's';
+      });
+      const stepsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            steps.forEach(step => {
+              step.style.opacity = '1';
+              step.style.transform = 'translateY(0)';
+            });
+            // Animate connector line
+            const connector = document.querySelector('.steps-connector');
+            if (connector) {
+              connector.style.transform = 'scaleX(0)';
+              connector.style.transformOrigin = 'left';
+              connector.style.transition = 'transform 0.8s ease 0.2s';
+              connector.style.borderTopStyle = 'solid';
+              connector.style.borderTopColor = 'rgba(201,168,76,0.6)';
+              requestAnimationFrame(() => requestAnimationFrame(() => {
+                connector.style.transform = 'scaleX(1)';
+              }));
+            }
+            stepsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      const stepsWrapper = document.querySelector('.steps-wrapper');
+      if (stepsWrapper) stepsObserver.observe(stepsWrapper);
+    })();
+
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const href = a.getAttribute('href');
