@@ -1084,7 +1084,18 @@
 
   <!-- NAV -->
   <nav id="mainNav">
-    <a class="nav-logo" href="#">BABYLON</a>
+    <a class="nav-logo" href="#">
+      <svg viewBox="0 0 160 40" style="height:34px;display:block;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Geometric B mark — premium, architectural -->
+        <rect x="0" y="2" width="28" height="36" rx="3" fill="#1a1a2e"/>
+        <rect x="5" y="7" width="13" height="10" rx="2" fill="#c9a84c"/>
+        <rect x="5" y="21" width="16" height="11" rx="2" fill="#c9a84c"/>
+        <circle cx="18" cy="12" r="5" fill="#1a1a2e"/>
+        <circle cx="21" cy="26.5" r="5.5" fill="#1a1a2e"/>
+        <!-- Wordmark -->
+        <text x="36" y="28" font-family="'Playfair Display',Georgia,serif" font-weight="700" font-size="22" fill="#1a1a2e" letter-spacing="2">BABYLON</text>
+      </svg>
+    </a>
     <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -1095,8 +1106,14 @@
       <li><a href="#temoignages">Témoignages</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="mailto:contact@babylon-agency.fr" class="nav-cta">Parler à un expert →</a></li>
+      <li><button class="lang-toggle" onclick="toggleLang()" style="background:transparent;border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.05em;">EN</button></li>
     </ul>
   </nav>
+
+  <!-- TRUST BAR -->
+  <div style="background:rgba(201,168,76,0.08);border-bottom:1px solid rgba(201,168,76,0.2);padding:10px 5%;text-align:center;">
+    <span style="font-size:13px;font-weight:600;color:var(--gold);" data-fr="🔒 Données hébergées en France · 🇫🇷 Conçu pour le marché français · RGPD conforme · Performance 100% à la result" data-en="🔒 Data hosted in France · 🇫🇷 Built for the French market · GDPR compliant · 100% results-based">🔒 Données hébergées en France · 🇫🇷 Conçu pour le marché français · RGPD conforme · Performance 100% à la result</span>
+  </div>
 
   <!-- HERO -->
   <section class="hero" id="hero">
@@ -1104,8 +1121,8 @@
     <div class="hero-glow-2"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Collecte F2F Premium · France</div>
-      <h1>La collecte qui performe.<br><em>Sans compromis.</em></h1>
-      <p class="hero-sub">BABYLON acquiert vos donateurs mensuels. Vous payez uniquement les résultats. Nous absorbons tout le reste.</p>
+      <h1 data-fr="La collecte qui performe.<br><em>Sans compromis.</em>" data-en="Fundraising that performs.<br><em>No compromises.</em>">La collecte qui performe.<br><em>Sans compromis.</em></h1>
+      <p class="hero-sub" data-fr="BABYLON acquiert vos donateurs mensuels. Vous payez uniquement les résultats. Nous absorbons tout le reste." data-en="BABYLON acquires your monthly donors. You pay for results only. We absorb all the risk.">BABYLON acquiert vos donateurs mensuels. Vous payez uniquement les résultats. Nous absorbons tout le reste.</p>
       <div class="hero-ctas">
         <a href="mailto:contact@babylon-agency.fr" class="btn-primary">Demander une étude gratuite →</a>
         <a href="#comment-ca-marche" class="btn-secondary">Découvrir notre méthode</a>
@@ -1419,7 +1436,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 BABYLON Agency. Tous droits réservés.</span>
+        <span data-fr="© 2026 BABYLON Group. Tous droits réservés. · 🔒 Hébergé en France · RGPD conforme" data-en="© 2026 BABYLON Group. All rights reserved. · 🔒 Hosted in France · GDPR compliant">© 2026 BABYLON Group. Tous droits réservés. · 🔒 Hébergé en France · RGPD conforme</span>
         <span style="color: var(--gold); font-size: 12px; letter-spacing: 0.1em;">PERFORMANCE · QUALITÉ · INTÉGRITÉ</span>
       </div>
     </div>
@@ -1459,6 +1476,17 @@
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
+    }
+  </script>
+  <script>
+    let currentLang = 'fr';
+    function toggleLang() {
+      currentLang = currentLang === 'fr' ? 'en' : 'fr';
+      document.querySelectorAll('[data-fr]').forEach(el => {
+        el.innerHTML = currentLang === 'fr' ? el.dataset.fr : el.dataset.en;
+      });
+      const toggle = document.querySelector('.lang-toggle');
+      if (toggle) toggle.textContent = currentLang === 'fr' ? 'EN' : 'FR';
     }
   </script>
 </body>
