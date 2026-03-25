@@ -1,35 +1,34 @@
 # BABYLON Agency
 
-> La meilleure agence de collecte F2F au monde.
+> Static website for BABYLON — France's 100% performance-based F2F donor acquisition agency.
 
-## About
-BABYLON is a 100% performance-based face-to-face donor acquisition agency operating in France. Clients (NGOs) pay only for validated donors. BABYLON absorbs all operational and attrition risk.
+## What it does
+Public-facing agency website presenting BABYLON's model, services, team, and client results. Targets NGO acquisition directors and fundraising managers. Built as production-ready static HTML — no framework, no build step, deploys directly to GitHub Pages.
 
-## Model
-- **Price per validated donor:** €220
-- **Validation condition:** 2 consecutive successful payments
-- **Average monthly donation:** €15
-- **Gross margin per donor:** ~€110 (~50%)
-- **Break-even:** 73 donors/month
+## Tech stack
+- **Frontend:** Static HTML5, CSS3, vanilla JavaScript
+- **Fonts:** Google Fonts (Inter)
+- **Deployment:** GitHub Pages
 
-## Products
-This repo contains the BABYLON agency website and internal tools.
-
-## Tech Stack
-- Website: Next.js (migrating from HTML)
-- Dashboard: Node.js + Express
-- Data: PostgreSQL
-
-## Structure
-```
-/website          - Public-facing agency website (FR)
-/dashboard        - Internal agency operations dashboard
-/board-app        - Task tracking board
-/docs             - Internal documentation
-```
+## Features
+- Hero section with agency positioning and CTA
+- Performance model explainer (results-based, risk-absorbed by agency)
+- Services overview — F2F acquisition, donor onboarding, retention
+- Key metrics — price per donor, validation model, margin structure
+- Product suite section — links to ruaj.ai, relance.ai, collecte.ai, CauseWork
+- Contact / lead capture form
+- Draft banner (pending final push approval)
 
 ## Status
-🚧 In active development — not yet public
+Production-ready — pending push — last sprint #122
 
----
-*Part of BABYLON Group*
+## Live URL
+https://agencebabylonfundraising-lab.github.io/babylon-agency
+
+## Local development
+```bash
+# No build step required
+open index.html
+# or serve locally:
+npx serve .
+```
